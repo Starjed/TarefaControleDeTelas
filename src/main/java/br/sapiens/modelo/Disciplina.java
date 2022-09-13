@@ -4,10 +4,15 @@ import java.util.List;
 
 public class Disciplina {
 
-    public Disciplina(String nome, HorasDisciplina horas, List<CursosEnum> cursos) {
+  private int matricula = 0;
+   public String aluno = new Pessoa("Gabriel", "Albuquerque", "Biel123@hotmail.com").toString();
+
+    public Disciplina(String nome, HorasDisciplina horas, List<CursosEnum> cursos, String aluno) {
         this.nome = nome;
         this.horas = horas;
         this.cursos = cursos;
+        this.aluno = aluno;
+
     }
 
     public Disciplina(String nome, HorasDisciplina horas) throws Exception {

@@ -10,11 +10,18 @@ public class Pessoa {
 
     private List<Disciplina> disciplinas;
 
+    private Boolean bolsa;
+
+    private CursosEnum cursos;
+
     public Pessoa(String nome, String sobreNome, String email){
         this.nome = nome;
         this.sobreNome = sobreNome;
         this.email = email;
-        this.profissao = profissao;
+        this.profissao = ProfissaoEnum.Nenhum;
+        this.disciplinas = getDisciplinas();
+        this.bolsa = false;
+        this.cursos = CursosEnum.ESQUERDO;
     }
 
     public String getNome() {
@@ -38,7 +45,10 @@ public class Pessoa {
     }
 
     public List<Disciplina> getDisciplinas() {
-        return disciplinas;
+        if (getDisciplinas() != null) {
+            return disciplinas;
+        }
+        return null;
     }
 
     public void setDisciplinas(List<Disciplina> disciplinas) {
@@ -47,17 +57,24 @@ public class Pessoa {
 
     @Override
     public String toString() {
-        return nome+" "+sobreNome+" | "+email;
+        return nome+" "+sobreNome+" | "+email + disciplinas + bolsa + cursos;
     }
 
     public boolean getBolsa() {
+        return false;
+    }
+
+    public boolean setBolsa() {
         return true;
     }
 
-    public void setBolsa(boolean b) {
+    public CursosEnum getCurso() throws Exception {
+        if(cursos == null)
+            throw new Exception("O curso tem que ser é obrigatorio");
+        return cursos;
     }
 
-    public CursosEnum getCurso() {
-        return null;
+    public CursosEnum setCurso() {
+        return CursosEnum.SISTEMA;
     }
 }

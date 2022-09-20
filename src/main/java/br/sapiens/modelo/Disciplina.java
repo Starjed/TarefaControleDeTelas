@@ -18,7 +18,7 @@ public class Disciplina {
     private String nome;
     private final HorasDisciplina horas;
 
-    private List<CursosEnum> cursos;
+    public List<CursosEnum> cursos;
 
     public String getNome() {
         return nome;

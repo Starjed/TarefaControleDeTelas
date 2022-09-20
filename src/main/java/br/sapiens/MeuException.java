@@ -21,4 +21,12 @@ public class MeuException extends Exception {
         alerta.show();
         LABEL.setText(msg);
     }
+
+    public void mostrarSucesso(){
+        String msg = "Ocorreu um erro! "+this.getMessage();
+        var alerta = new Alert(Alert.AlertType.ERROR,msg);
+        alerta.setTitle("Erro ao cadastrar pessoa");
+        alerta.show();
+        LABEL.setText(msg);
+    }
 }

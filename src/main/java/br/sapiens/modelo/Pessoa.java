@@ -1,6 +1,7 @@
 package br.sapiens.modelo;
 
 import br.sapiens.MeuException;
+import javafx.scene.control.ChoiceBox;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +12,13 @@ public class Pessoa {
     private final String sobreNome;
     private final String email;
     private final List<Matricula> matriculas;
-    private final CursosEnum curso;
+    private CursosEnum curso;
     private ProfissaoEnum profissao;
 
-    private List<Disciplina> disciplinas;
-    private boolean bolsa = false;
+    public List<Disciplina>  disciplinas;
+    private boolean bolsa;
 
-    public Pessoa(String nome, String sobreNome, String email, CursosEnum curso ) throws MeuException {
+    public Pessoa(String nome, String sobreNome, String email, ChoiceBox<CursosEnum> cursosEnum, ChoiceBox<ProfissaoEnum> profissao, boolean bolsa) throws MeuException {
         this.nome = nome;
         if(nome.isEmpty())
             throw new MeuException("Nome não pode ser null");
@@ -29,9 +30,18 @@ public class Pessoa {
                 .matcher(email)
                 .matches())
             throw new MeuException("Email invalido");
-        this.profissao = ProfissaoEnum.Nenhum;
-        this.matriculas = new ArrayList();
-        this.curso = curso;
+        
+        this.curso = cursosEnum.getValue();
+
+        this.profissao = profissao.getValue();
+        
+        this.matriculas = new ArrayList<>();
+        
+//        this.curso = cursosEnum;
+//        if (curso == null)
+//        throw new MeuException("O Curso nao pode ser nulo");
+        
+        this.bolsa = bolsa;
     }
 
     public String getNome() {
@@ -54,6 +64,11 @@ public class Pessoa {
         this.profissao = profissao;
     }
 
+    public boolean getBolsa() {
+        return bolsa;
+    }
+
+
     public List<Matricula> getMatriculas() {
         return matriculas;
     }
@@ -62,20 +77,12 @@ public class Pessoa {
         this.disciplinas = disciplinas;
     }
 
+    public CursosEnum[] getCurso() {
+        return new CursosEnum[]{curso};
+    }
+
     @Override
     public String toString() {
-        return nome+" "+sobreNome+" | "+email;
-    }
-
-    public boolean getBolsa() {
-        return bolsa;
-    }
-
-    public void setBolsa(boolean b) {
-        this.bolsa = b;
-    }
-
-    public CursosEnum getCurso() {
-        return curso;
+        return nome + " " + sobreNome + " | Email: " + email + " | Profissão: " + profissao + " | Curso: " + curso + " | Possui bolsa: " +  bolsa;
     }
 }
